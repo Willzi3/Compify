@@ -21,7 +21,7 @@ router.get("/", (req, res) => {
 // Gets one product
 router.get("/:id", (req, res) => {
     try {
-      con.query(`SELECT * FROM products WHERE product_id = ${req.params.id}`, (err, result) => {
+      con.query(`SELECT * FROM products WHERE product_id ="${req.params.id}"`, (err, result) => {
         if (err) throw err;
         res.send(result);
       });
@@ -51,7 +51,7 @@ router.get("/:id", (req, res) => {
     try {
       con.query(
         //When using the ${}, the content of con.query MUST be in the back tick
-        `UPDATE products set name="${name}", price="${price}", descriptions="${descriptions}", image="${image}", category="${category}", created_by="${created_date}", stock="${stock}" WHERE product_id = "${req.params.id}"`,
+        `UPDATE products set name="${name}", price="${price}", descriptions="${descriptions}", image="${image}", category="${category}", created_date="${created_date}", stock="${stock}" WHERE product_id ="${req.params.id}"`,
         (err, result) => {
           if (err) throw err;
           res.send(result);
@@ -113,7 +113,7 @@ router.get("/:id", (req, res) => {
   router.delete("/:id",middleware, (req, res) => {
     // if(req.user.user_type === "Admin") {
       try {
-        con.query(`DELETE FROM products WHERE product_id = ${req.params.id}`, (err, result) => {
+        con.query(`DELETE FROM products WHERE product_id ="${req.params.id}"`, (err, result) => {
           if (err) throw err;
           res.send("Sucessfully deleted this product");
         });
