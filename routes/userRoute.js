@@ -124,6 +124,37 @@ router.get("/", (req, res) => {
       }
     });
   
+    //edit users
+    router.put("edit/:id", middleware, (req, res) => {
+      // the below allows you to only need one const, but every input required is inside of the brackets
+      const {
+        email,
+            birth_date,
+            gender,
+            address,
+            description,
+            image
+      } = req.body;
+  
+      const salt = bcrypt.genSaltSync(10);
+      const hash = bcrypt.hashSync(password, salt);
+      // OR
+      // the below requires you to add everything one by one
+      //   const email = req.body.email;
+      try {
+        con.query(
+          //When using the ${}, the content of con.query MUST be in the back tick
+          `UPDATE users set  birth_date="${birth_date}", gender="${gender}", address="${address}", description="${description}", image="${image}" WHERE user_id ="${req.params.id}"`,
+          (err, result) => {
+            if (err) throw err;
+            res.send(result);
+          }
+        );
+      } catch (error) {
+        console.log(error);
+        res.status(400).send(error);
+      }
+    });
     router.post("/register", (req, res) => {
       try {
         let sql = "INSERT INTO users SET ?";
