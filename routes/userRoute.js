@@ -128,7 +128,6 @@ router.get("/", (req, res) => {
     router.put("edit/:id", middleware, (req, res) => {
       // the below allows you to only need one const, but every input required is inside of the brackets
       const {
-        email,
             birth_date,
             gender,
             address,
@@ -136,8 +135,8 @@ router.get("/", (req, res) => {
             image
       } = req.body;
   
-      const salt = bcrypt.genSaltSync(10);
-      const hash = bcrypt.hashSync(password, salt);
+      // const salt = bcrypt.genSaltSync(10);
+      // const hash = bcrypt.hashSync(password, salt);
       // OR
       // the below requires you to add everything one by one
       //   const email = req.body.email;
