@@ -201,6 +201,40 @@ router.get("/", (req, res) => {
       }
     });
     
+    //update user
+    router.put("update/:id", middleware, (req, res) => {
+      // the below allows you to only need one const, but every input required is inside of the brackets
+      const {
+            full_name,
+            phone,
+            user_type,
+            joined_date,
+            gender,
+            address,
+            description,
+            image,
+            cart
+      } = req.body;
+  
+      // const salt = bcrypt.genSaltSync(10);
+      // const hash = bcrypt.hashSync(password, salt);
+      // OR
+      // the below requires you to add everything one by one
+      //   const email = req.body.email;
+      try {
+        con.query(
+          //When using the ${}, the content of con.query MUST be in the back tick
+          `UPDATE users set full_name="${full_name}", phone="${phone}", user_type="${user_type}", joined_date="${joined_date}", gender="${gender}", address="${address}", description="${description}", image="${image}", cart="${cart}" WHERE user_id ="${req.params.id}"`,
+          (err, result) => {
+            if (err) throw err;
+            res.send(result);
+          }
+        );
+      } catch (error) {
+        console.log(error);
+        res.status(400).send(error);
+      }
+    });
     // Login
   router.post("/login", (req, res) => {
     console.log(req.body)
@@ -228,6 +262,11 @@ router.get("/", (req, res) => {
                       full_name: result[0].full_name,
                       email: result[0].email,
                       user_type: result[0].user_type,
+                      image: result[0].image,
+                      phone: result[0].phone,
+                      gender: result[0].gender,
+                      address: result[0].address,
+                      description: result[0].description
                     },
                   };
                   // Creating a token and setting expiry date
