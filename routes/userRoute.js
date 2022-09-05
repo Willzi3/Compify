@@ -45,7 +45,8 @@ router.get("/", (req, res) => {
       gender,
       address,
       description,
-      image
+      image,
+      cart
     } = req.body;
     // OR
     // the below requires you to add everything one by one
@@ -62,7 +63,8 @@ router.get("/", (req, res) => {
             gender,
             address,
             description,
-            image) VALUES ("${email}", "${password}", "${full_name}", "${phone}", "${user_type}", "${joined_date}", "${gender}", "${address}", "${description}", "${image}")`,
+            image,
+            cart) VALUES ("${email}", "${password}", "${full_name}", "${phone}", "${user_type}", "${joined_date}", "${gender}", "${address}", "${description}", "${image}", "${cart}")`,
         (err, result) => {
           if (err) throw err;
           res.send(result);
@@ -101,7 +103,8 @@ router.get("/", (req, res) => {
             gender,
             address,
             description,
-            image
+            image,
+            cart
       } = req.body;
   
       const salt = bcrypt.genSaltSync(10);
@@ -112,7 +115,7 @@ router.get("/", (req, res) => {
       try {
         con.query(
           //When using the ${}, the content of con.query MUST be in the back tick
-          `UPDATE users set email="${email}", password="${hash}", full_name="${full_name}", phone="${phone}", user_type="${user_type}", joined_date="${joined_date}" gender="${gender}", address="${address}", description="${description}", image="${image}" WHERE user_id ="${req.params.id}"`,
+          `UPDATE users set email="${email}", password="${hash}", full_name="${full_name}", phone="${phone}", user_type="${user_type}", joined_date="${joined_date}" gender="${gender}", address="${address}", description="${description}", image="${image}", cart="${cart}" WHERE user_id ="${req.params.id}"`,
           (err, result) => {
             if (err) throw err;
             res.send(result);
@@ -167,7 +170,8 @@ router.get("/", (req, res) => {
           gender,
           address,
           description,
-          image
+          image,
+          cart
         } = req.body;
      
         // The start of hashing / encryption
@@ -184,7 +188,8 @@ router.get("/", (req, res) => {
           gender,
           address,
           description,
-          image
+          image,
+          cart
         };
         con.query(sql, user, (err, result) => {
           if (err) throw err;
