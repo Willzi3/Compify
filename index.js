@@ -20,7 +20,7 @@ app.use((req, res, next) => {
 
 const userRoute = require('./routes/userRoute.js')
 const productRoute = require('./routes/productRoute.js')
-const cartRoute = require('./routes/cartRoute')
+const cartRoute = require('./routes/cartRoute.js')
 
 app.use("/users", userRoute)
 app.use("/products", productRoute)
