@@ -50,7 +50,7 @@ router.post("/users/:id/cart", middleware, bodyParser.json(), (req, res) => {
       const strProd = `
       SELECT *
       FROM products
-      WHERE product_id = ${product_id};
+      WHERE product_id ="${product_id}";
       `;
       con.query(strProd, async (err, results) => {
         if (err) throw err;
