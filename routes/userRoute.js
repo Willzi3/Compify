@@ -109,7 +109,7 @@ router.get("/", (req, res) => {
       try {
         con.query(
           //When using the ${}, the content of con.query MUST be in the back tick
-          `UPDATE users set email="${email}", password="${hash}", full_name="${full_name}", phone="${phone}", user_type="${user_type}", birth_date="${birth_date}", gender="${gender}", address="${address}", description="${description}", image="${image}" WHERE user_id ="${req.params.id}"`,
+          `UPDATE users set email="${email}", password="${hash}", full_name="${full_name}", phone="${phone}", user_type="${user_type}", gender="${gender}", address="${address}", description="${description}", image="${image}" WHERE user_id ="${req.params.id}"`,
           (err, result) => {
             if (err) throw err;
             res.send(result);
