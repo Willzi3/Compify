@@ -63,7 +63,7 @@ router.post("/users/:id/cart", middleware, bodyParser.json(), (req, res) => {
           image: results[0].image,
           category: results[0].category,
           created_date: results[0].created_date,
-          stock: results[0].created_date,
+          stock: results[0].stock,
         };
         cart.push(product);
         // res.send(cart)
