@@ -41,7 +41,6 @@ router.get("/", (req, res) => {
       full_name,
       phone,
       user_type,
-      birth_date,
       gender,
       address,
       description,
@@ -58,11 +57,10 @@ router.get("/", (req, res) => {
             full_name,
             phone,
             user_type,
-            birth_date,
             gender,
             address,
             description,
-            image) VALUES ("${email}", "${password}", "${full_name}", "${phone}", "${user_type}", "${birth_date}", "${gender}", "${address}", "${description}", "${image}")`,
+            image) VALUES ("${email}", "${password}", "${full_name}", "${phone}", "${user_type}", "${gender}", "${address}", "${description}", "${image}")`,
         (err, result) => {
           if (err) throw err;
           res.send(result);
@@ -97,7 +95,6 @@ router.get("/", (req, res) => {
             full_name,
             phone,
             user_type,
-            birth_date,
             gender,
             address,
             description,
