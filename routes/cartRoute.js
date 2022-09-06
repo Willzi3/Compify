@@ -11,11 +11,11 @@ router.get("/users/:id/cart", (req, res) => {
     con.query(strQuery, [req.params.id], (err, results) => {
       if (err) throw err;
       (function Check(a, b) {
-        a = parseInt(req.user.user_id);
+        a = parseInt(req.params.id);
         b = parseInt(req.params.id);
         if (a === b) {
           //   res.send(results[0].cart);
-          // console.log(results[0]);
+          // console.log(results[0]);          
       res.json(JSON.parse(results[0].cart));
         } else {
           res.json({
@@ -39,9 +39,11 @@ router.post("/users/:id/cart", bodyParser.json(), (req, res) => {
       WHERE user_id="${req.params.id}";
       `;
     con.query(qcart, (err, results) => {
+
       if (err) throw err;
       let cart;
       if (results.length > 0) {
+        cart = JSON.parse(results[0].cart);
         if (results[0].cart === null) {
           cart = [];
         } else {
