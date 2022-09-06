@@ -57,7 +57,7 @@ router.post("/users/:id/cart", bodyParser.json(), (req, res) => {
       con.query(strProd, async (err, results) => {
         if (err) throw err;
         let product = {
-          cartid: cart.length + 1,
+          cart: cart.length + 1,
           id: results[0].id,
           name: results[0].name,
           price: results[0].price,
