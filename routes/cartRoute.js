@@ -36,7 +36,7 @@ router.post("/users/:id/cart", bodyParser.json(), (req, res) => {
     let { product_id } = req.body;
     const qcart = `SELECT cart
       FROM users
-      WHERE user_id = ${req.params.id};
+      WHERE user_id="${req.params.id}";
       `;
     con.query(qcart, (err, results) => {
       if (err) throw err;
@@ -51,13 +51,13 @@ router.post("/users/:id/cart", bodyParser.json(), (req, res) => {
       const strProd = `
       SELECT *
       FROM products
-      WHERE product_id = ${product_id};
+      WHERE product_id="${product_id}";
       `;
 
       con.query(strProd, async (err, results) => {
         if (err) throw err;
         let product = {
-          // cartid: cart.length + 1,
+          cartid: cart.length + 1,
           id: results[0].id,
           name: results[0].name,
           price: results[0].price,
@@ -71,7 +71,7 @@ router.post("/users/:id/cart", bodyParser.json(), (req, res) => {
         // res.send(cart)
         const strQuery = `UPDATE users
       SET cart = ?
-      WHERE (user_id = ${req.params.id})`;
+      WHERE (user_id="${req.params.id}")`;
         con.query(strQuery, /*req.user.id */ JSON.stringify(cart), (err) => {
           if (err) throw err;
           res.json({
