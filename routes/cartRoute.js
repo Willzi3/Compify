@@ -10,21 +10,21 @@ router.get("/users/:id/cart", (req, res) => {
     const strQuery = "SELECT cart FROM users WHERE user_id = ?";
     con.query(strQuery, [req.params.id], (err, results) => {
       if (err) throw err;
-      // (function Check(a, b) {
-      //   a = parseInt(req.user.user_id);
-      //   b = parseInt(req.params.id);
-      //   if (a === b) {
-      //     //   res.send(results[0].cart);
-      //     // console.log(results[0]);
+      (function Check(a, b) {
+        a = parseInt(req.user.user_id);
+        b = parseInt(req.params.id);
+        if (a === b) {
+          //   res.send(results[0].cart);
+          // console.log(results[0]);
       res.json(JSON.parse(results[0].cart));
-      //   } else {
-      //     res.json({
-      //       a,
-      //       b,
-      //       msg: "Please Login To View cart",
-      //     });
-      //   }
-      // })();
+        } else {
+          res.json({
+            a,
+            b,
+            msg: "Please Login To View cart",
+          });
+        }
+      })();
     });
   } catch (error) {
     throw error;
