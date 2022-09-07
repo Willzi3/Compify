@@ -78,17 +78,19 @@ router.get("/", (req, res) => {
   
   // Delete one users
   router.delete("/:id", (req, res) => {
-      try {
-        con.query(`DELETE FROM users WHERE user_id ='${req.params.id}'`, (err, result) => {
+    try {
+      con.query(
+        `DELETE FROM users WHERE user_id = ${req.params.id}`,
+        (err, result) => {
           if (err) throw err;
-          res.send("Sucessfully deleted this user");
-        });
-        // res.send({ id: req.params.id });
-      } catch (error) {
-        console.log(error);
-        res.status(400).send(error);
-      }
-    });
+          res.send(result);
+        }
+      );
+    } catch (error) {
+      console.log(error);
+      res.status(400).send(error);
+    }
+  });
   
   //Update users
     router.put("/:id", middleware, (req, res) => {
@@ -202,7 +204,7 @@ router.get("/", (req, res) => {
     });
     
     //update user
-    router.put("update/:id", middleware, (req, res) => {
+    router.put("/:id", middleware, (req, res) => {
       // the below allows you to only need one const, but every input required is inside of the brackets
       const {
             full_name,
