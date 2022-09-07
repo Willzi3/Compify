@@ -127,7 +127,7 @@ router.get("/:id", (req, res) => {
     router.delete("/:id", (req, res) => {
       try {
         con.query(
-          `DELETE FROM products WHERE id=${req.params.id}`,
+          `DELETE FROM products WHERE id="${req.params.id}"`,
           (err, result) => {
             if (err) throw err;
             res.send(result);
