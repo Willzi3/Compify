@@ -110,22 +110,33 @@ router.get("/:id", (req, res) => {
  );
   
   // Delete one products
-  router.delete("/:id",middleware, (req, res) => {
-    // if(req.user.user_type === "Admin") {
+  // router.delete("/:id", (req, res) => {
+  //   try {
+  //     con.query(
+  //       `DELETE FROM products WHERE id=${req.params.id}`,
+  //       (err, result) => {
+  //         if (err) throw err;
+  //         res.send(result);
+  //       }
+  //     );
+  //   } catch (error) {
+  //     console.log(error);
+  //   })
+
+
+    router.delete("/:id", (req, res) => {
       try {
-        con.query(`DELETE FROM products WHERE product_id ="${req.params.id}"`, (err, result) => {
-          if (err) throw err;
-          res.send("Sucessfully deleted this product");
-        });
-        // res.send({ id: req.params.id });
+        con.query(
+          `DELETE FROM products WHERE id=${req.params.id}`,
+          (err, result) => {
+            if (err) throw err;
+            res.send(result);
+          }
+        );
       } catch (error) {
         console.log(error);
-        res.status(400).send(error);
-      }}
-      // else{
-      //   res.send("Not an Admin, access denied!");
-      //  } 
-    );
+      }
+    });
 
 
 module.exports = router;
