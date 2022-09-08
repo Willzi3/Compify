@@ -310,10 +310,10 @@ router.get("/", (req, res) => {
           con.query(updateSql, updateUser, (err, updated) => {
             if (err) throw err;
             console.log(updated);
-            res.send("Successfully Updated");
+            res.send(JSON.stringify("Successfully Updated"));
           });
         } else {
-          res.send("User not found");
+          res.send(JSON.stringify("User not found"));
         }
       });
     } catch (error) {
