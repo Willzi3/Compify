@@ -301,7 +301,7 @@ router.get("/", (req, res) => {
       con.query(sql, user, (err, result) => {
         if (err) throw err;
         if (result.length !== 0) {
-          let updateSql = `UPDATE users SET ? WHERE user_id ="${req.params.id}"`;
+          let updateSql = `UPDATE users SET ? WHERE user_id = ${req.params.id}`;
           let updateUser = {
             full_name: req.body.full_name,
             gender: req.body.gender,
