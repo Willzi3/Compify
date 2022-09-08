@@ -291,7 +291,36 @@ router.get("/", (req, res) => {
             console.log(error);
           }
         });
-  
+  //update user
+  router.patch("/:id", middleware, (req, res) => {
+    try {
+      let sql = "SELECT * FROM users WHERE ?";
+      let user = {
+        id: req.params.id,
+      };
+      con.query(sql, user, (err, result) => {
+        if (err) throw err;
+        if (result.length !== 0) {
+          let updateSql = `UPDATE users SET ? WHERE user_id ="${req.params.id}"`;
+          let updateUser = {
+            availability: req.body.availability,
+            experience: req.body.experience,
+            portUrl: req.body.portUrl,
+            githubUrl: req.body.githubUrl,
+          };
+          con.query(updateSql, updateUser, (err, updated) => {
+            if (err) throw err;
+            console.log(updated);
+            res.send("Successfully Updated");
+          });
+        } else {
+          res.send("User not found");
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  });
   
         // Verify
   router.get("/users/verify", (req, res) => {
