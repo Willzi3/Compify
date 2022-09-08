@@ -292,7 +292,7 @@ router.get("/", (req, res) => {
           }
         });
   //update user
-  router.patch("/:id", (req, res) => {
+  router.patch("/:id", middleware, (req, res) => {
     try {
       let sql = "SELECT * FROM users WHERE ?";
       let user = {
