@@ -260,7 +260,7 @@ router.get("/", (req, res) => {
                   // The information the should be stored inside token
                   const payload = {
                     user: {
-                      id: result[0].id,
+                      id: result[0].user_id,
                       full_name: result[0].full_name,
                       email: result[0].email,
                       user_type: result[0].user_type,
