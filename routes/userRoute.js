@@ -305,6 +305,7 @@ router.get("/", (req, res) => {
           let updateUser = {
             full_name: req.body.full_name,
             gender: req.body.gender,
+            user_type: req.body.user_type,
           };
           con.query(updateSql, updateUser, (err, updated) => {
             if (err) throw err;
