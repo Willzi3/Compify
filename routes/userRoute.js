@@ -296,7 +296,7 @@ router.get("/", (req, res) => {
     try {
       let sql = "SELECT * FROM users WHERE ?";
       let user = {
-        id: req.params.id,
+        user_id: req.params.id,
       };
       con.query(sql, user, (err, result) => {
         if (err) throw err;
