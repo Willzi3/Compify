@@ -36,7 +36,7 @@ router.post("/users/:id/cart", bodyParser.json(), (req, res) => {
     let { product_id } = req.body;
     const qcart = `SELECT cart
       FROM users
-      WHERE user_id="${req.params.id}";
+      WHERE user_id= ?;
       `;
     con.query(qcart, (err, results) => {
 
@@ -53,7 +53,7 @@ router.post("/users/:id/cart", bodyParser.json(), (req, res) => {
       const strProd = `
       SELECT *
       FROM products
-      WHERE product_id="${product_id}";
+      WHERE product_id= ?;
       `;
 
       con.query(strProd, async (err, results) => {
