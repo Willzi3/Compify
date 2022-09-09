@@ -304,7 +304,12 @@ router.get("/", (req, res) => {
           let updateSql = `UPDATE users SET ? WHERE user_id ="${req.params.id}"`;
           let updateUser = {
             full_name: req.body.full_name,
+            joined_date: req.body.joined_date,
+            phone: req.body.phone,
             gender: req.body.gender,
+            address: req.body.address,
+            description: req.body.description,
+            image: req.body.image,
             user_type: req.body.user_type,
           };
           con.query(updateSql, updateUser, (err, updated) => {
